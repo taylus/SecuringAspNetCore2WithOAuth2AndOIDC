@@ -18,4 +18,10 @@
     <ProjectReference Include="..\ImageGallery.Model\ImageGallery.Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Cert\test-cert.pfx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

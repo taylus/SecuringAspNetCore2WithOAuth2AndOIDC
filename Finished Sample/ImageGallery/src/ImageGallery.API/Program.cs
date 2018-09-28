@@ -1,10 +1,11 @@
-﻿using ImageGallery.API.Entities;
+﻿using System;
+using System.Net;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using System;
+using ImageGallery.API.Entities;
 
 namespace ImageGallery.API
 {
@@ -34,9 +35,18 @@ namespace ImageGallery.API
             host.Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+        public static IWebHost BuildWebHost(string[] args)
+        {
+            return WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+                .UseKestrel(options =>
+                {
+                    options.Listen(IPAddress.Loopback, 44351, listenOptions =>
+                    {
+                        listenOptions.UseHttps("Cert/test-cert.pfx", "password");
+                    });
+                })
                 .Build();
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace Marvin.IDP
                 .UseStartup<Startup>()
                 .UseKestrel(options =>
                 {
-                    options.Listen(IPAddress.Loopback, 9000, listenOptions =>
+                    options.Listen(IPAddress.Loopback, 44379, listenOptions =>
                     {
                         listenOptions.UseHttps("Cert/test-cert.pfx", "password");
                     });
